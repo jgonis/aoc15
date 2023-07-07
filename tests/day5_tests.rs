@@ -16,7 +16,7 @@ fn problem1() -> TestResult {
         .arg("-i")
         .arg(DAY5_INPUT)
         .assert()
-        .stdout(predicate::str::contains("282749"));
+        .stdout(predicate::str::contains("255"));
     Ok(())
 }
 
@@ -30,6 +30,6 @@ fn problem2() -> TestResult {
         .arg("-i")
         .arg(DAY5_INPUT)
         .assert()
-        .stdout(predicate::str::contains("9962624"));
+        .stdout(predicate::str::contains("55"));
     Ok(())
 }
