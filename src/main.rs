@@ -8,6 +8,7 @@ mod day3;
 mod day4;
 mod day5;
 
+mod day6;
 mod utils;
 
 fn main() -> Result<(), Box<dyn Error>> {
@@ -60,6 +61,8 @@ fn main() -> Result<(), Box<dyn Error>> {
         (4, 2) => day4::p2::solve(contents)?,
         (5, 1) => day5::p1::solve(contents)?,
         (5, 2) => day5::p2::solve(contents)?,
+        (6, 1) => day6::p1::solve(contents)?,
+        (6, 2) => day6::p2::solve(contents)?,
         _ => Err("unimplemented problem")?,
     };
     println!("{}", result);
