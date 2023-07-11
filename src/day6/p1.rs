@@ -1,11 +1,6 @@
+use crate::utils::action_type::ActionType;
 use anyhow::Result;
 use std::collections::HashMap;
-
-enum ActionType {
-    TurnOn,
-    TurnOff,
-    Toggle,
-}
 
 pub fn solve(input: String) -> Result<String> {
     let mut light_grid: HashMap<(usize, usize), bool> = HashMap::new();
@@ -21,7 +16,7 @@ pub fn solve(input: String) -> Result<String> {
                         light_grid.insert((x, y), false);
                     }
                     ActionType::Toggle => {
-                        let light = light_grid.(&(x, y))
+                        let light = light_grid.get(&(x, y)).unwrap_or(&false);
                         light_grid.insert((x, y), !*light);
                     }
                 }
@@ -70,20 +65,33 @@ mod tests {
     use anyhow::Result;
 
     #[test]
-    fn nice_strings() -> Result<()> {
-        assert!(p1::is_string_nice("turn on 0,0 through 999,999"));
+    fn returns_1_000_000() -> Result<()> {
+        assert_eq!(
+            1_000_000.to_string(),
+            p1::solve(String::from("turn on 0,0 through 999,999"))?
+        );
         Ok(())
     }
 
     #[test]
-    fn naughty_strings() -> Result<()> {
-        assert!(p1::is_string_nice("toggle 0,0 through 999,0"));
+    fn returns_1000() -> Result<()> {
+        assert_eq!(
+            1000.to_string(),
+            p1::solve(String::from("toggle 0,0 through 999,0"))?
+        );
         Ok(())
     }
 
     #[test]
-    fn naughty_strings() -> Result<()> {
-        assert!(!p1::is_string_nice("turn off 499,499 through 500,500"));
+    fn returns_999_996() -> Result<()> {
+        assert_eq!(
+            999_996.to_string(),
+            p1::solve(
+                r#"turn on 0,0 through 999,999
+        turn off 499,499 through 500,500"#
+                    .to_string()
+            )?
+        );
         Ok(())
     }
 }
